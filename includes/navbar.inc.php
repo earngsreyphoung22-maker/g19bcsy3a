@@ -14,7 +14,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Auth
+            
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/g19bcsy3a/pages/login.php">Login</a></li>

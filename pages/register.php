@@ -1,7 +1,4 @@
-<?php
-    include'../includes/header.inc.php';
-    include'../includes/navbar.inc.php';
-?>
+
 
     <form class="col-md-8 col-lg-6 mx-auto">
         <h1>Register Page</h1>
@@ -25,6 +22,3 @@
   <button type="submit" class="btn btn-primary">Submit</button>
   
 </form>
-<?php
-    include'../includes/footer.inc.php';
-?>
