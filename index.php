@@ -1,6 +1,7 @@
 <?php
-    include'./includes/header.inc.php';
-    include'./includes/navbar.inc.php';
+require_once './init/db.init.php';
+    include './includes/header.inc.php';
+    include './includes/navbar.inc.php';
 
   $available_pages = ['login','register'];
 
@@ -8,7 +9,7 @@
     $page = $_GET['page'];
 
     if (in_array($page, $available_pages)) { 
-      include ' ./pages/'.$page.'.php'; 
+      include './pages/'.$page.'.php'; 
     }else{
       echo '<h1>Error 404</h1>';
     }

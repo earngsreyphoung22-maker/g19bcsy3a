@@ -17,8 +17,8 @@
             
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/g19bcsy3a/pages/login.php">Login</a></li>
-            <li><a class="dropdown-item" href="/g19bcsy3a/pages/register.php">Register</a></li>
+            <li><a class="dropdown-item" href="/g19bcsy3a/?page=login">Login</a></li>
+            <li><a class="dropdown-item" href="/g19bcsy3a/?page=register">Register</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>

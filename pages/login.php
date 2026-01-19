@@ -6,7 +6,7 @@
 
 
     <form method="post" action="./?page=register" class="col-md-10 col-lg-6 mx-auto"">
-        <h3>Register Page</h3>
+        <h3>Login Page</h3>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
