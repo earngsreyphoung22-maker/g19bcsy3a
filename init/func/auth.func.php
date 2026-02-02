@@ -1,23 +1,54 @@
 <?php
-function usernameExists($username){
+function usernameExists($username)
+{
     global $db;
     $query = $db->prepare('SELECT * FROM tbl_users WHERE username = ?');
-      $query->bind_param('s', $username);
-      $query->execute();
-      $result = $query->get_result();
-      if($result->num_rows){
+    $query->bind_param('s', $username);
+    $query->execute();
+    $result = $query->get_result();
+    if ($result->num_rows) {
         return true;
 
-      }
-      return false;
+    }
+    return false;
 }
-function registerUser($name, $username, $passwd){
+function registerUser($name, $username, $passwd)
+{
     global $db;
     $query = $db->prepare('INSERT INTO tbl_users (name,username,passwd)VALUE(?,?,?)');
-    $query->bind_param('sss',$name,$username,$passwd);
+    $query->bind_param('sss', $name, $username, $passwd);
     $query->execute();
-    if($db->affected_rows){
+    if ($db->affected_rows) {
         return true;
     }
     return false;
+}
+
+function logUserIN($username, $passwd)
+{
+    global $db;
+    $query = $db->prepare('SELECT * FROM tbl_users WHERE username = ? AND passwd = ?');
+    $query->bind_param('ss', $username, $passwd);
+    $query->execute();
+    $result = $query->get_result();
+    if ($result->num_rows) {
+        return $result->fetch_object();
+    }
+    return false;
+}
+function loggedUserIN()
+{
+    global $db;
+    if (!isset($_SESSION['user_id'])) {
+        return null;
+    }
+    $user_id = $_SESSION['user_id'];
+    $query = $db->prepare('SELECT * FROM tbl_users WHERE id = ?');
+    $query->bind_param('d', $user_id);
+    $query->execute();
+    $result = $query->get_result();
+    if ($result->num_rows) {
+        return $result->fetch_object();
+    }
+    return null;
 }
