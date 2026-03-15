@@ -13,7 +13,13 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li> -->
+        <?php if (isAdmin()) { ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $baseUrl ?>?page=user/list">Users</a>
+          </li>
+        <?php } ?>
         <li class="nav-item dropdown">
+
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Auth
 
