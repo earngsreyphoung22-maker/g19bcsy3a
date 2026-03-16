@@ -1,6 +1,15 @@
 <?php
+$id = $_GET["id"];
+$targetUser = readUser($id);
+if ($targetUser == null || $targetUser->level === 'admin') {
+    header('Location: ./?page=user/list');
+
+}
+
+
 $nameErr = $usernameErr = $passwdErr = '';
-$name = $username = '';
+$name = $targetUser->name;
+$username = $targetUser->username;
 if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo'])) {
     $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
@@ -20,17 +29,17 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     }
     if (empty($nameErr) && empty($usernameErr) && empty($passwdErr)) {
         try {
-            if (createUser($name, $username, $passwd, $photo)) {
-                $name = $username = '';
-                echo '<div class="alert alert-warning" role="alert">
-                Registration successful! You can now
-                <a href="./?page=login" class="alert-link">login<a/>
-                </div>';
-            } else {
-                echo '<div class="alert alert-warning" role="alert">
-                    Sorry Registration failed! Please Try again.
-                    </div>';
-            }
+            // if (createUser($name, $username, $passwd, $photo)) {
+            //     $name = $username = '';
+            //     echo '<div class="alert alert-warning" role="alert">
+            //     Registration successful! You can now
+            //     <a href="./?page=login" class="alert-link">login<a/>
+            //     </div>';
+            // } else {
+            //     echo '<div class="alert alert-warning" role="alert">
+            //         Sorry Registration failed! Please Try again.
+            //         </div>';
+            // }
         } catch (Exception $e) {
             echo '<div class="alert alert-warning" role="alert">
                     ' . $e->getMessage() . '
@@ -41,8 +50,8 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
 ?>
 
 
-<form method="post" action="./?page=user/create" enctype="multipart/form-data" class="col-md-8 col-lg-6 mx-auto">
-    <h3>Create User</h3>
+<form method="post" action="./?page=user/update" enctype="multipart/form-data" class="col-md-8 col-lg-6 mx-auto">
+    <h3>Update</h3>
     <div class="d-flex justify-content-center">
         <input name="photo" type="file" id="profileUpload" hidden>
         <label role="button" for="profileUpload">
