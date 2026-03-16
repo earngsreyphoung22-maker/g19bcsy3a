@@ -97,6 +97,7 @@ function setUserNewPassword($passwd)
     }
     return false;
 }
+<<<<<<< HEAD
 function changeProfileImage($image)
 {
     global $db;
@@ -121,6 +122,49 @@ function deleteProfileImage()
         unlink($user->photo);
     }
     $query = $db->prepare('UPDATE tbl_users SET photo = null WHERE id = ?');
+=======
+function insertImage($file)
+{
+    global $db;
+    $image_name = $file["photo"]["name"];
+    $image_temp = $file["photo"]["tmp_name"];
+
+    $db->begin_transaction();
+
+    $query = $db->prepare("UPDATE tbl_users SET photo = ? WHERE id = ?");
+    $query->bind_param('sd', $image_name, $_SESSION['user_id']);
+    $query->execute();
+    if (!$query->affected_rows) {
+        $db->rollback();
+        return false;
+    }
+    if (!move_uploaded_file($image_temp, "./assets/image/" . $image_name)) {
+        $db->rollback();
+        return false;
+    }
+    $db->commit();
+
+    return true;
+}
+function getUserImage($user_id)
+{
+    global $db;
+    $query = $db->prepare("SELECT photo FROM tbl_users WHERE id = ?");
+    $query->bind_param('d', $user_id);
+    $query->execute();
+    $result = $query->get_result();
+    if ($result->num_rows) {
+        return $result->fetch_object()->photo;
+    }
+    return null;
+}
+
+function deleteUserImage()
+{
+    global $db;
+    $user = loggedUserIN();
+    $query = $db->prepare("UPDATE tbl_users SET photo = NULL WHERE id = ?");
+>>>>>>> be03ceb44672e33b378fa7bad1b465cc4d19d537
     $query->bind_param('d', $user->id);
     $query->execute();
     if ($db->affected_rows) {
@@ -128,6 +172,7 @@ function deleteProfileImage()
     }
     return false;
 }
+<<<<<<< HEAD
 function uploadImage($image)
 {
     $image_name = $image['name'];
@@ -157,3 +202,5 @@ function uploadImage($image)
     move_uploaded_file($tmp_name, $image_path);
     return $image_path;
 }
+=======
+>>>>>>> be03ceb44672e33b378fa7bad1b465cc4d19d537
