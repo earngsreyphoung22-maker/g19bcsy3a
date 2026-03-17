@@ -29,20 +29,18 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     }
     if (empty($nameErr) && empty($usernameErr) && empty($passwdErr)) {
         try {
-            // if (createUser($name, $username, $passwd, $photo)) {
-            //     $name = $username = '';
-            //     echo '<div class="alert alert-warning" role="alert">
-            //     Registration successful! You can now
-            //     <a href="./?page=login" class="alert-link">login<a/>
-            //     </div>';
-            // } else {
-            //     echo '<div class="alert alert-warning" role="alert">
-            //         Sorry Registration failed! Please Try again.
-            //         </div>';
-            // }
+            if (updateUser($id, $name, $username, $password, $photo)) {
+                echo '<div class="alert alert-success" role="alert">
+            Update successful! <a href="./?page=user/list" class="alert-link">go to List</a>.
+            </div>';
+            } else {
+                echo '<div class="alert alert-danger" role="alert">
+            Update failed! Please try again.
+            </div>';
+            }
         } catch (Exception $e) {
-            echo '<div class="alert alert-warning" role="alert">
-                    ' . $e->getMessage() . '
+            echo '<div class="alert alert-danger" role="alert">
+                    upload failed please try again.
                     </div>';
         }
     }

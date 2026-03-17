@@ -3,8 +3,6 @@ $oldPasswd = $newPasswd = $confirmNewPasswd = '';
 $oldPasswdErr = $newPasswdErr = '';
 $response = null;
 
-$photo = empty(getUserImage($_SESSION['user_id'])) ? 'image.png' : getUserImage($_SESSION['user_id']);
-
 if (isset($_POST['changePasswd'], $_POST['oldPasswd'], $_POST['newPasswd'], $_POST['confirmNewPasswd'])) {
     $oldPasswd = trim($_POST['oldPasswd']);
     $newPasswd = trim($_POST['newPasswd']);
@@ -62,32 +60,32 @@ if (isset($_POST['deletePhoto'])) {
 <div class="row">
     <div class="col-6">
         <form method="post" action="./?page=profile" enctype="multipart/form-data">
-        <form method="post" action="./?page=profile" enctype="multipart/form-data">
-            <div class="d-flex justify-content-center">
-                <input name="photo" type="file" id="profileUpload" hidden accept=".jpg, .jpeg, .png , .gif">
-                <label role="button" for="profileUpload">
-                    <img src="<?php echo loggedUserIN()->photo ?? './assets/image/emptyUser.jpg' ?>"
-                        class="rounded img-thumbnail" style="max-width: 100px">
-                </label>
-                <?php
-                if (!$response) { ?>
-                    <div class="invalid-feedback">Upload Image Unsuccess</div>
-                <?php }
-                ?>
-                <?php
-                if ($response) { ?>
-                    <div class="invalid-feedback">Upload Image success</div>
-                <?php }
-                ?>
-            </div>
-            <div class="d-flex justify-content-center">
-                <button type="submit" name="deletePhoto" class="btn btn-outline-danger"
-                    onclick="return confirm('Are you sure you want to deleted this image?')">Delete</button>
-                <button type="submit" name="uploadPhoto" class="btn btn-outline-success"
-                    onclick="return confirm('Do you want to upload this image?')">Upload</button>
+            <form method="post" action="./?page=profile" enctype="multipart/form-data">
+                <div class="d-flex justify-content-center">
+                    <input name="photo" type="file" id="profileUpload" hidden accept=".jpg, .jpeg, .png , .gif">
+                    <label role="button" for="profileUpload">
+                        <img src="<?php echo loggedUserIN()->photo ?? './assets/image/emptyUser.jpg' ?>"
+                            class="rounded img-thumbnail" style="max-width: 100px">
+                    </label>
+                    <?php
+                    if (!$response) { ?>
+                        <div class="invalid-feedback">Upload Image Unsuccess</div>
+                    <?php }
+                    ?>
+                    <?php
+                    if ($response) { ?>
+                        <div class="invalid-feedback">Upload Image success</div>
+                    <?php }
+                    ?>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" name="deletePhoto" class="btn btn-outline-danger"
+                        onclick="return confirm('Are you sure you want to deleted this image?')">Delete</button>
+                    <button type="submit" name="uploadPhoto" class="btn btn-outline-success"
+                        onclick="return confirm('Do you want to upload this image?')">Upload</button>
 
-            </div>
-        </form>
+                </div>
+            </form>
     </div>
     <div class="col-6">
         <form method="post" action="./?page=profile" class="col-md-10 col-lg-6 mx-auto">

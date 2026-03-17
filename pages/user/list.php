@@ -7,7 +7,7 @@
 <div class="table-responsive">
     <table class="table table-striped table-hover">
         <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Photo</th>
             <th>Name</th>
             <th>Option</th>
@@ -17,7 +17,7 @@
         $count = 1;
         while ($row = $users->fetch_object()) {
             echo '<tr>
-                <td>' . $count . '</td>
+                <td>' . $count++ . '</td>
                 <td> <img src ="' . ($row->photo ?? './assets/image/emptyUser.jpg') . '" class="rounded img-thumbnail" style="max-width: 200px">
                 </td>
                 <td>' . $row->name . '</td>
