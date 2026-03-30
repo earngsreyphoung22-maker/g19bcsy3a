@@ -34,21 +34,26 @@ function readUser($id)
    }
    return null;
 }
-function updateUser($id, $username, $name, $passwd, $photo)
+function updateUser($id, $name, $username, $password, $photo)
 {
    global $db;
-   $user = readUser($id);
-   $image_path = $user->photo;
-   if (empty($passwd)) {
-      $passwd = $user->passwd;
+   $image_path = null;
+   if (empty($password)) {
+      $password = readUser($id)->passwd;
    }
    if (!empty($photo['name'])) {
       $image_path = uploadImage($photo);
    }
-   $query = $db->prepare('UPDATE tbl_users SET username = ?, name = ?, passwd = ?, photo = ? WHERE id = ?');
-   $query->bind_param('ssssi', $username, $name, $passwd, $image_path, $id);
+   if ($image_path) {
+      $query = $db->prepare('UPDATE tbl_users SET name = ?, username = ?, passwd = ?, photo = ? WHERE id = ?');
+      $query->bind_param('ssssi', $name, $username, $password, $image_path, $id);
+   } else {
+      $query = $db->prepare('UPDATE tbl_users SET name = ?, username = ?, passwd = ? WHERE id = ?');
+      $query->bind_param('sssi', $name, $username, $password, $id);
+   }
+
    $query->execute();
-   if ($db->affected_rows) {
+   if ($query->affected_rows) {
       return true;
    }
    return false;

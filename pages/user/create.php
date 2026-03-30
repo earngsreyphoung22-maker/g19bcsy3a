@@ -43,6 +43,7 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
 
 <form method="post" action="./?page=user/create" enctype="multipart/form-data" class="col-md-8 col-lg-6 mx-auto">
     <h3>Create User</h3>
+    
     <div class="d-flex justify-content-center">
         <input name="photo" type="file" id="profileUpload" hidden>
         <label role="button" for="profileUpload">
